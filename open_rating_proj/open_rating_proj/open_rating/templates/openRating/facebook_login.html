@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# openrating: http://ogp.me/ns/fb/openrating#">
+
+<meta property="fb:app_id" content="437498466268409" />
+<meta property="og:type"   content="openrating:country" />
+<meta property="og:url"    content="http://www.cinequant.com/open-rating?country={{country}}&note={{note}}" />
+<meta property="og:title"  content="{{country}} {{note}}" />
+<meta property="og:description"  content="{{country}} {{note}}" />
+<meta property="og:image"  content="http://www.cinequant.com/static/open-rating/{{note}}.png" />
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+<meta name="robots" content="all"/>
+<meta name="description" content="Outil de notation de dette souveraine open-source open rating"/>
+<meta name="keywords" content="notation, rating, dette, souveraine, agence de notation, agence, open"/>
+
+<title>Open Rating, by Cinequant</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+
+<script src="static/open-rating/jquery.tools.min.js"></script>
+
+<script src="static/open-rating/note.js"></script>
+<script src="static/open-rating/open_rating_data.js"></script>
+<script src="static/open-rating/openRating.js"></script>
+
+<link href="static/open-rating/style.css" rel="stylesheet" type="text/css" media="screen">
+<link href="static/open-rating/jquery-ui-1.8.18.custom.css" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Arvo' rel='stylesheet' type='text/css'>
+
+<script>
+pays="";
+
+function chargeData()
+{
+var form=document.getElementById("pays");
+pays=form.options[form.selectedIndex].text;
+
+document.getElementById("image_pays").innerHTML="<strong>"+ pays +"</strong>"+"<br><img src='static/open-rating/"+pays+".gif' height='250'/>";
+document.getElementById("nom_pays").innerHTML="<strong>"+ pays +"</strong>";
+
+document.getElementById("note_sp").innerHTML="<strong>"+note[pays][0]+"</strong>";
+document.getElementById("note_fitch").innerHTML="<strong>"+note[pays][1]+"</strong>";
+document.getElementById("note_moody").innerHTML="<strong>"+note[pays][2]+"</strong>";
+
+document.getElementsByName("dette_PIB")[0].value=macro[pays]['dette_PIB'];
+document.getElementsByName("hdi")[0].value=macro[pays]['hdi'];
+document.getElementsByName("deficit_2011")[0].value=macro[pays]['deficit_PIB'];
+document.getElementsByName("chomage")[0].value=macro[pays]['chomage'];
+document.getElementsByName("croissance_2011")[0].value=macro[pays]['croissance'];
+document.getElementsByName("revenus")[0].value=macro[pays]['revenus'];
+document.getElementsByName("courant")[0].value=macro[pays]['bop'];
+document.getElementsByName("defaut_exterieur")[0].value=macro[pays]['defaut_exterieur'];
+document.getElementsByName("inflation")[0].value=macro[pays]['inflation'];
+document.getElementsByName("interet")[0].value=macro[pays]['interet'];
+
+}
+</script>
+</head>
+<body>
+<div id="fb-root"></div>
+    <script>
+      // Load the SDK Asynchronously
+      (function(d){
+         var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement('script'); js.id = id; js.async = true;
+         js.src = "//connect.facebook.net/en_US/all.js";
+         ref.parentNode.insertBefore(js, ref);
+       }(document));
+
+      // Init the SDK upon load
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '437498466268409', // App ID
+          channelUrl : '//'+window.location.hostname+'/channel', // Path to your Channel File
+          status     : true, // check login status
+          cookie     : true, // enable cookies to allow the server to access the session
+          xfbml      : true  // parse XFBML
+        });
+
+        // listen for and handle auth.statusChange events
+        FB.Event.subscribe('auth.statusChange', function(response) {
+          if (response.authResponse) {
+            // user has auth'd your app and is logged into Facebook
+            FB.api('/me', function(me){
+              if (me.name) {
+                document.getElementById('auth-displayname').innerHTML = me.name;
+              }
+            })
+            document.getElementById('auth-loggedout').style.display = 'none';
+            document.getElementById('auth-loggedin').style.display = 'block';
+          } else {
+            // user has not auth'd your app, or is not logged into Facebook
+            document.getElementById('auth-loggedout').style.display = 'block';
+            document.getElementById('auth-loggedin').style.display = 'none';
+          }
+        });
+
+        // respond to clicks on the login and logout links
+        document.getElementById('auth-loginlink').addEventListener('click', function(){
+          FB.login();
+        });
+        document.getElementById('auth-logoutlink').addEventListener('click', function(){
+          FB.logout();
+        }); 
+      } 
+    </script>
+
+
+<div id="fenetre">
+  <h1>Open Rating, l'application de notation souveraine</h1>
+  
+    {% csrf_token %}
+     <div id="auth-status">
+        <div id="auth-loggedout">
+          <a href="#" id="auth-loginlink">Login</a>
+        </div>
+        <div id="auth-loggedin" style="display:none">
+          Hi, <span id="auth-displayname"></span>  
+        (<a href="#" id="auth-logoutlink">logout</a>)
+      </div>
+    </div>
+</div>
+
+<div id="backgroundPopup" style="height: 611px; display: none; opacity: 0.7; "></div>
+
+</body>
+</html>
+

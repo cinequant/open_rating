@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# openrating: http://ogp.me/ns/fb/openrating#">
+
+<meta property="fb:app_id" content="437498466268409" />
+<meta property="og:type"   content="openrating:country" />
+<meta property="og:url"    content="http://www.cinequant.com/open-rating?country={{country}}&amp;note={{note}}" />
+<meta property="og:title"  content="{{country}} {{note}}" />
+<meta property="og:description"  content="{{country}} {{note}}" />
+<meta property="og:image"  content="http://www.cinequant.com/static/open-rating/{{note}}.png" />
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+<meta name="robots" content="all"/>
+<meta name="description" content="Outil de notation de dette souveraine open-source open rating"/>
+<meta name="keywords" content="notation, rating, dette, souveraine, agence de notation, agence, open"/>
+
+<title>Open Rating, by Cinequant</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+
+<script src="static/open-rating/jquery.tools.min.js"></script>
+
+<script src="static/open-rating/note.js"></script>
+<script src="static/open-rating/open_rating_data.js"></script>
+<script src="static/open-rating/openRating.js"></script>
+
+<link href="static/open-rating/style.css" rel="stylesheet" type="text/css" media="screen">
+<link href="static/open-rating/jquery-ui-1.8.18.custom.css" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Arvo' rel='stylesheet' type='text/css'>
+
+<script>
+
+/* sliders pour les reglages de l algo */
+  $(function() {
+
+  $( "#slider_credibilite" ).slider({
+  range: "min",
+  value: 50,
+  min: 1,
+  max: 100,
+  slide: function( event, ui ) {
+  $( "#reg_credibilite" ).val( ui.value );
+  }
+  }); 
+
+  $( "#slider_risque" ).slider({
+  range: "min",
+  value: 50,
+  min: 1,
+  max: 100,
+  slide: function( event, ui ) {
+  $( "#reg_risque" ).val( ui.value );
+  }
+  }); 
+
+  $( "#slider_macro" ).slider({
+  range: "min",
+  value: 50,
+  min: 1,
+  max: 100,
+  slide: function( event, ui ) {
+  $( "#reg_macro" ).val( ui.value );
+  }
+  }); 
+
+  $( "#slider_dev" ).slider({
+  range: "min",
+  value: 50,
+  min: 1,
+  max: 100,
+  slide: function( event, ui ) {
+  $( "#reg_dev" ).val( ui.value );
+  }
+  });
+  
+  $( "#reg_credibilite").val( $( "#slider_credibilite" ).slider( "value") );
+  
+  $( "#reg_risque").val( $( "#slider_risque" ).slider( "value") );
+   
+  $( "#reg_macro").val( $( "#slider_macro" ).slider( "value") );
+   
+  $( "#reg_dev").val( $( "#slider_dev" ).slider( "value") );
+
+
+/* sliders pour le slide sur la credibilite de la politique eco*/
+  $( "#slider_cred_proj" ).slider({
+  range: "min",
+  value: 5,
+  min: 1,
+  max: 10,
+  slide: function( event, ui ) {
+  $( "#cred_proj" ).val( ui.value );
+  }
+  });
+
+  $( "#slider_pol_eco" ).slider({
+  range: "min",
+  value: 5,
+  min: 1,
+  max: 10,
+  slide: function( event, ui ) {
+  $( "#pol_eco" ).val( ui.value );
+  }
+  });
+
+  $( "#slider_stabilite" ).slider({
+  range: "min",
+  value: 5,
+  min: 1,
+  max: 10,
+  slide: function( event, ui ) {
+  $( "#stabilite" ).val( ui.value );
+  }
+  });
+
+  $( "#slider_cred_terme" ).slider({
+  range: "min",
+  value: 5,
+  min: 1,
+  max: 10,
+  slide: function( event, ui ) {
+  $( "#cred_terme" ).val( ui.value );
+  }
+  });
+  
+  $( "#slider_cred_stat" ).slider({
+  range: "min",
+  value: 5,
+  min: 1,
+  max: 10,
+  slide: function( event, ui ) {
+  $( "#cred_stat" ).val( ui.value );
+  }
+  });
+
+/* slides sur risque instabilite*/
+  $( "#slider_institutions" ).slider({
+  range: "min",
+  value: 5,
+  min: 1,
+  max: 10,
+  slide: function( event, ui ) {
+  $("#institutions").val( ui.value );
+  }
+  });
+
+  $( "#slider_conflit" ).slider({
+  range: "min",
+  value: 5,
+  min: 1,
+  max: 10,
+  slide: function( event, ui ) {
+  $( "#conflit" ).val( ui.value );
+  }
+  });
+
+  $( "#slider_concentration" ).slider({
+  range: "min",
+  value: 5,
+  min: 1,
+  max: 10,
+  slide: function( event, ui ) {
+  $( "#concentration" ).val( ui.value );
+  }
+  });
+
+  $( "#slider_credit" ).slider({
+  range: "min",
+  value: 5,
+  min: 1,
+  max: 10,
+  slide: function( event, ui ) {
+  $( "#credit" ).val( ui.value );
+  }
+  });
+  $( "#slider_impot" ).slider({
+  range: "min",
+  value: 5,
+  min: 1,
+  max: 10,
+  slide: function( event, ui ) {
+  $( "#impot" ).val( ui.value );
+  }
+  });
+  
+
+/* sliders verticaux*/
+$( "#slider_deficit_2012" ).slider({
+  orientation: "vertical",
+  range: "min",
+  min: -2,
+  max: 10,
+  value: 2,
+  slide: function( event, ui ) {
+  $( "#deficit_2012" ).val( ui.value );
+  }
+  });
+  $( "#deficit_2012" ).val( $( "#slider_deficit_2012" ).slider( "value" ) );
+
+$( "#slider_deficit_2013" ).slider({
+  orientation: "vertical",
+  range: "min",
+  min: -2,
+  max: 10,
+  value: 2,
+  slide: function( event, ui ) {
+  $( "#deficit_2013" ).val( ui.value );
+  }
+  });
+  $( "#deficit_2013" ).val( $( "#slider_deficit_2013" ).slider( "value" ) );
+
+$( "#slider_deficit_2014" ).slider({
+  orientation: "vertical",
+  range: "min",
+  min: -2,
+  max: 10,
+  value: 2,
+  slide: function( event, ui ) {
+  $( "#deficit_2014" ).val( ui.value );
+  }
+  });
+  $( "#deficit_2014" ).val( $( "#slider_deficit_2014" ).slider( "value" ) );
+
+$( "#slider_deficit_2015" ).slider({
+  orientation: "vertical",
+  range: "min",
+  min: -2,
+  max: 10,
+  value: 2,
+  slide: function( event, ui ) {
+  $( "#deficit_2015" ).val( ui.value );
+  }
+  });
+  $( "#deficit_2015" ).val( $( "#slider_deficit_2015" ).slider( "value" ) );
+
+$( "#slider_deficit_2016" ).slider({
+  orientation: "vertical",
+  range: "min",
+  min: -2,
+  max: 10,
+  value: 2,
+  slide: function( event, ui ) {
+  $( "#deficit_2016" ).val( ui.value );
+  }
+  });
+  $( "#deficit_2016" ).val( $( "#slider_deficit_2016" ).slider( "value" ) );
+
+$( "#slider_croissance_2012" ).slider({
+  orientation: "vertical",
+  range: "min",
+  min: -2,
+  max: 5,
+step:0.5,
+  value: 2,
+  slide: function( event, ui ) {
+  $( "#croissance_2012" ).val( ui.value );
+  }
+  });
+  $( "#croissance_2012" ).val( $( "#slider_croissance_2012" ).slider( "value" ) );
+
+$( "#slider_croissance_2013" ).slider({
+  orientation: "vertical",
+  range: "min",
+  min: -2,
+  max: 5,
+step:0.5,
+  value: 2,
+  slide: function( event, ui ) {
+  $( "#croissance_2013" ).val( ui.value );
+  }
+  });
+  $( "#croissance_2013" ).val( $( "#slider_croissance_2013" ).slider( "value" ) );
+
+$( "#slider_croissance_2014" ).slider({
+  orientation: "vertical",
+  range: "min",
+  min: -2,
+  max: 5,
+step:0.5,
+  value: 2,
+  slide: function( event, ui ) {
+  $( "#croissance_2014" ).val( ui.value );
+  }
+  });
+  $( "#croissance_2014" ).val( $( "#slider_croissance_2014" ).slider( "value" ) );
+
+$( "#slider_croissance_2015" ).slider({
+  orientation: "vertical",
+  range: "min",
+  min: -2,
+  max: 5,
+step:0.5,
+  value: 2,
+  slide: function( event, ui ) {
+  $( "#croissance_2015" ).val( ui.value );
+  }
+  });
+  $( "#croissance_2015" ).val( $( "#slider_croissance_2015" ).slider( "value" ) );
+
+$( "#slider_croissance_2016" ).slider({
+  orientation: "vertical",
+  range: "min",
+  min: -2,
+  max: 5,
+  step:0.5,
+  value: 2,
+  slide: function( event, ui ) {
+  $( "#croissance_2016" ).val( ui.value );
+  }
+  });
+  $( "#croissance_2016" ).val( $( "#slider_croissance_2016" ).slider( "value" ) );
+});
+
+</script>
+</head>
+
+
+<body>
+<!-- Place this render call where appropriate -->
+<script type="text/javascript">
+  window.___gcfg = {lang: 'fr'};
+
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+
+<div id="fb-root"></div>
+<script>
+
+  // Load the SDK Asynchronously
+  (function(d){
+  var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement('script'); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js";
+  ref.parentNode.insertBefore(js, ref);
+  }(document));
+  
+  // Init the SDK upon load
+  window.fbAsyncInit = function() {
+  FB.init({
+  appId      : '437498466268409', // App ID
+  status     : true, // check login status
+  cookie     : true, // enable cookies to allow the server to access the session
+  xfbml      : true  // parse XFBML
+  });
+
+  // listen for and handle auth.statusChange events
+  FB.Event.subscribe('auth.statusChange', function(response) {
+  if (response.authResponse) {
+  // user has auth'd your app and is logged into Facebook
+  } else {
+  // user has not auth'd your app, or is not logged into Facebook
+  document.getElementById('auth-loggedin').style.display = 'none';
+  }
+  });
+  
+        // respond to clicks on the login and logout links
+        document.getElementById('sendbuttonFB').addEventListener('click', function(){
+          FB.login(function(response) {
+              noteAndDisplayAndPush();             
+              });
+           });
+
+        // respond to clicks on the button to rate without posting on facebook
+        document.getElementById('sendbutton').addEventListener('click', function(){
+                       noteAndDisplay();             
+           });
+ // respond to clicks on the login and logout links
+        document.getElementById('sendbuttonFB_debutant').addEventListener('click', function(){
+          FB.login(function(response) {
+              noteAndDisplayAndPush();             
+              });
+           });
+
+        // respond to clicks on the button to rate without posting on facebook
+        document.getElementById('sendbutton_debutant').addEventListener('click', function(){
+                       noteAndDisplay();             
+           });        
+};
+
+function noteAndDisplayAndPush(){
+// call the rating webservice and load popup
+      jQuery("#sendbutton").attr('disabled', true);
+      jQuery("#sendbuttonFB").attr('disabled', true);
+      var form = jQuery("#ratingForm");
+      jQuery.post(
+          form.attr('action') + ' #ajaxwrapper',
+          form.serializeArray(),
+          function(response) {
+               //alert('reponse ajax');
+               responseArray=eval(response);
+               //alert (responseArray);
+               noteMax=responseArray[0];    
+               urlDSA=responseArray[1];
+               jQuery("#sendbutton").attr('disabled', false);
+               jQuery("#sendbuttonFB").attr('disabled', false);
+               postRate();
+               loadPopup();
+               }
+          );
+       };
+
+function noteAndDisplay(){
+// call the rating webservice and load popup
+      jQuery("#sendbutton").attr('disabled', true);
+      jQuery("#sendbuttonFB").attr('disabled', true);
+      var form = jQuery("#ratingForm");
+      jQuery.post(
+          form.attr('action') + ' #ajaxwrapper',
+          form.serializeArray(),
+          function(response) {
+               //alert('reponse ajax');
+               responseArray=eval(response);
+               //alert (responseArray);
+               noteMax=responseArray[0];    
+               urlDSA=responseArray[1];
+               jQuery("#sendbutton").attr('disabled', false);
+               jQuery("#sendbuttonFB").attr('disabled', false);
+               loadPopup();
+               }
+          );
+       };
+
+function postRate(){
+//push to FB la note
+  var acc_tok='';
+  var url_pays='http://www.cinequant.com/open-rating?country='+pays+"&note="+noteMax;
+  alert(url_pays);
+  FB.api(
+        '/me/openrating:rate',
+        'post',
+        { access_token:acc_tok,
+  country: url_pays,  
+  }, function(response) {
+           if (!response || response.error) {
+              alert('Error push FB');
+           } else {
+              alert('pushing rate on FB was successful! Action ID: ' + response.id);
+           }
+        });
+  }
+</script>
+
+<div id="fenetre">
+  <h1>Open Rating, l'application de notation souveraine</h1>
+
+  <div id="nav_expert" style="display:none;">
+    <img src="static/open-rating/back.png" alt="back" class="button_previous" style="position:relative;top:3px;" />
+    <span id="nav_intro_expert" class="selected">
+      Intro</span>
+    <span id="nav_1_expert" >
+      1</span>
+    <span id="nav_2_expert">
+      2</span>
+    <span id="nav_3_expert">
+      3</span>
+    <span id="nav_4_expert">
+      4</span>
+    <span id="nav_5_expert">
+      5</span>
+    <span id="nav_6_expert">
+      6</span>
+    <span id="nav_7_expert">
+      7</span>
+</div>
+
+<div id="nav_debutant" style="display:none;">
+    <img src="static/open-rating/back.png" alt="back" class="button_previous" style="position:relative;top:3px;" />
+    <span id="nav_intro_debutant" class="selected">
+      Intro</span>
+    <span id="nav_1_debutant" >
+      1</span>
+    <span id="nav_2_debutant">
+      2</span>
+    <span id="nav_3_debutant">
+      3</span>
+    <span id="nav_4_debutant">
+      4</span>
+    <span id="nav_5_debutant">
+      5</span>
+</div>
+
+  <form id="ratingForm" action="#" method="POST">
+
+  <div id="carte_identite" style="display:none;heigth:200px;position:relative;top:418px;font-size:14px;">
+    
+    <div class="row" style="height:20px;">
+      <div class="cell cell_100">
+	<span id="nom_pays"></span>
+      </div>
+      <div class="cell cell_300">
+	Dette publique :
+	<input name="dette_PIB" class="input_identite" readonly="readonly">%
+      </div>
+      <div class="cell cell_300" title="L'IDH est un indice de l'ONU qui évalue le niveau de développement, en prenant en compte l'espérance de vie, l'éducation et le niveau de vie.">  
+	Indice de Développement Humain :
+	<input name="hdi" class="input_identite" readonly="readonly">%
+      </div>   
+    </div>
+    
+    <div class="row" style="height:20px;">
+     <div class="cell cell_100" >
+&nbsp;	
+      </div>
+      
+       <div class="cell cell_300" title="Les déficits sont calculés au niveau européen par Eurostat, selon une norme commune dite SEC 95.">
+	Déficit public :
+	<input name="deficit_2011" class="input_identite" readonly="readonly">%
+      </div>
+      <div class="cell cell_300">
+	Chomâge : 
+	<input name="chomage" class="input_identite" readonly="readonly">%
+      </div>
+    </div>
+    
+    <div class="row" style="height:20px;">
+      <div class="cell cell_100" style="width:100px">
+&nbsp;	
+      </div>
+      <div class="cell cell_300" title="Croissance du Produit Intérieur Brut, mesure de la quantité de richesse produite dans un pays.">
+	Croissance :
+	<input name="croissance_2011" class="input_identite" readonly="readonly">%
+      </div>
+      <div class="cell cell_300">
+	Revenus moyens par habitant :
+	<input name="revenus"  class="input_identite" readonly="readonly">$
+      </div>
+    </div>
+    
+    <div class="row" style="height:20px;">
+      <div class="cell cell_100">
+&nbsp;	
+      </div>
+      <div class="cell cell_300" title="C'est le solde des échanges internationaux de biens, de services, de revenus et de transferts courants. Il s'agit de l'ensemble des flux sauf ceux liés à des investissements ou des achats d'actifs. <a href='http://fr.wikipedia.org/wiki/Balance_courante'>page wikipedia</a>">
+	Déficit courant :
+	<input name="courant" class="input_identite" readonly="readonly">%
+      </div>
+      <div class="cell cell_300">
+	A fait récemment défaut ? 
+	<input name="defaut_exterieur" value="0" class="input_identite" readonly="readonly">
+      </div>
+    </div>
+    
+    <div class="row" style="height:20px;">
+      <div class="cell cell_100">
+&nbsp;	
+      </div>
+      <div class="cell cell_300">
+	Inflation :
+	<input name="inflation" class="input_identite" readonly="readonly">%
+      </div>
+      <div class="cell cell_300">
+	Intérêts sur la dette :
+	<input name="interet" class="input_identite" readonly="readonly"> %
+      </div>
+    </div>  
+  </div>
+<div id="footer" onclick="loadPopupCredit()">Méthodologie et crédits</div>
+<div id="popupCredit">
+<a id="popupCreditClose"></a>
+Open Rating est une application web développée par <a href="http://www.cinequant.com/">Cinequant SAS</a>, une startup spécialisée dans l'analyse de données. <br>
+Open Rating note les pays selon une méthodologie comparable à celle utilisée par le FMI pour évaluer la soutenabilité de la dette des pays. <br>
+D'une part, Open Rating calcule l'évolution future des ratios de dette, déterminée par les projections de croissance, de déficit, d'inflation et de taux d'intérêt sur la dette.<br>
+D'autre part, Open Rating évalue la tolérance à la dette, et la capacité du pays à mener à bien les réformes nécessaires, ou au contraire le risque qu'il s'enfonce dans une crise. Cette tolérance à la dette est évaluée de manière plus subjective, à partir des informations renseignées sur la crédibilité du gouvernement, sa capacité à réformer, etc. </div>  
+    {% csrf_token %}
+
+      <button  type=button id="button_generic_next" class="large awesome button_next" style="width:10em; position:relative; top:280px;display:none;">Etape suivante</button>
+    
+    <div id="slide1" class="slide" style="display:block;">	
+      <h2> Bienvenue !!!</h2>
+      <br>
+      Open Rating est une application permettant de noter vous même un Etat, afin de mieux comprendre les enjeux et la problématique de la notation souveraine. 
+      <br><br>
+      Cette note est essentielle pour les Etats lorsqu'ils souhaitent emprunter sur les marchés internationaux. Ainsi, en France, l'<a href="http://aft.gouv.fr/">Agence France Trésor</a> émet chaque semaine des titres de dette pour financer le budget français.<br><br>
+      Vous pourrez comparer les résultats de votre notation avec celles des grandes agences de notation, Standard and Poor's, Fitch Rating et Moody's.<br>
+      <br>
+      Des informations plus détaillées sont disponibles lorsque vous survolez certains termes techniques.
+      <br>
+      Tout d'abord, vous devez choisir le niveau de détails que vous souhaitez pour cette application :
+      <br><br>
+      
+      <div class="column" style="text-align:center;">
+	Pas besoin de trop de détails merci
+	<button type=button id="button_debutant" class="large awesome button_next" style="width:10em;" >Débutant</button>
+	<br>
+      </div>
+      
+      <div class="column" style="text-align:center;">
+	Je veux choisir tous les paramètres 
+	<button type=button id="button_expert" class="large awesome button_next" style="width:10em;" >Expert</button>
+      </div>
+    </div>
+    
+    
+    <div id="slide2" class="slide">
+      <br>
+      <h2>Quel pays souhaitez-vous noter ?</h2>
+      
+      <br><br>
+      Choisir parmi les pays suivants : <br>
+      
+      <select name="pays" id="pays">
+	<option value="France">France</option>
+	<option value="Allemagne">Allemagne</option>
+	<option value="Australie">Australie</option>
+	<option value="Autriche">Autriche</option>
+	<option value="Belgique">Belgique</option>
+	<option value="Canada">Canada</option>
+	<option value="Chili">Chili</option>
+	<option value="Corée">Corée</option>
+	<option value="Danemark">Danemark</option>
+	<option value="Espagne">Espagne</option>
+	<option value="Estonie">Estonie</option>
+	<option value="Etats-Unis">Etats-Unis</option>
+	<option value="Finlande">Finlande</option>
+	<option value="France">France</option>
+	<option value="Grèce">Grèce</option>
+	<option value="Hongrie">Hongrie</option>
+	<option value="Islande">Islande</option>
+	<option value="Israël">Israël</option>
+	<option value="Irlande">Irlande</option>
+	<option value="Italie">Italie</option>
+	<option value="Japon">Japon</option>
+	<option value="Luxembourg">Luxembourg</option>
+	<option value="Mexique">Mexique</option>
+	<option value="Norvège">Norvège</option>
+	<option value="Nouvelle-Zélande">Nouvelle-Zélande</option>
+	<option value="Pays-Bas">Pays-Bas</option>
+	<option value="Pologne">Pologne</option>
+	<option value="Portugal">Portugal</option>
+	<option value="République slovaque">République slovaque</option>
+	<option value="République tchèque">République tchèque</option>
+	<option value="Royaume-Uni">Royaume-Uni</option>
+	<option value="Slovénie">Slovénie</option>
+	<option value="Suède">Suède</option>
+	<option value="Suisse">Suisse</option>
+	<option value="Turquie">Turquie</option>
+      </select>
+      <br>
+      <br>
+      <button  type=button id="button_pays_existant" class="large awesome button_next" style="width:10em;" onclick="chargeData()">Sélectionner</button>
+      <br>
+    </div>
+    
+    <div id="slide3" class="slide">
+
+      <h2>La situation de ce pays aujourd'hui </h2>
+      
+      <div class="column" style="">
+		
+	<span id="image_pays"></span>
+      </div>
+      
+      <div class="column" style="">
+
+	Les notes de ce pays selon les grandes agences de notation
+	<br>
+	<br>
+	Standard and Poor's :
+	<span id="note_sp">N/A</span>
+	<br>
+	Fitch :
+	<span id="note_fitch">N/A</span>
+	<br>
+	Moody's :
+	<span id="note_moody">N/A</span>
+	<br>
+	<br>
+	Qui sont ces agences ? A qui appartiennent-elles ? Qui les paie ? 
+	<br>
+	Tous les éléments de réponse <a href="http://www.lefigaro.fr/conjoncture/2011/07/07/04016-20110707ARTFIG00542-les-agences-de-notation-decryptees.php" target="_blank"> ici.</a>
+      </div>   
+           
+      
+    </div>
+
+
+    <div id="slide4" class="slide">
+      <h2>Comment jugez-vous la politique économique du gouvernement ?</h2>
+      <br>      
+      <div class="row" style="height:80px;">
+	<div class="cell" title="La crédibilité est essentielle pour convaincre les investisseurs de sa politique, et donc obtenir des taux d'intérêts faible ce qui réduit le paiement de la dette.">
+	  Les projections de croissance et de déficit du gouvernement sont crédibles
+	</div>
+	<div class="cell" style="margin-bottom:20px;">
+	  <div id="slider_cred_proj" class="slider"></div> 
+	  <input type="hidden" id="cred_proj" name="cred_proj">
+	  
+	  <table class="slider_label">
+	    <tr>
+	      <td style="width:200px;">
+		Oui,</td>
+	      <td style="text-align:right;">Non, </td>
+	    </tr>
+	    <tr class="small"><td>
+		<div>les projections sont proches de celles des observateurs exterieurs</div>
+	      </td><td style="text-align:right;">personne n'y croit.
+	      </td>
+	    </tr>
+	  </table>   
+	</div>
+      </div>
+      
+      <div class="row" style="height:80px;">
+	<div class="cell">
+	  Le gouvernement privilégie une stratégie économique à long terme sur le court terme
+	</div>
+	<div class="cell" style="margin-bottom:20px;">
+	  <div id="slider_cred_terme" class="slider"></div>
+	  <input type="hidden" id="cred_terme" name="cred_terme"> 
+	  <table class="slider_label">
+	    <tr>
+	      <td style="width:200px;">
+		Oui,</td>
+	      <td style="text-align:right;">Non, </td>
+	    </tr>
+	    <tr class="small"><td>
+		<div >les réformes engagées produiront des effets à long terme, comme <a href="http://www.ifri.org/downloads/ndc09lestrade.pdf" target="_blank">l'Agenda 2010 de Schroeder en Allemagne en 2003</a></div>
+	      </td><td style="text-align:right;">le gouvernement s'inquiète surtout de sa réélection
+	      </td>
+	    </tr>
+	  </table>    
+	</div>
+      </div>
+      
+      <div class="row" style="height:80px;">
+	<div class="cell">
+	  Les statistiques économiques officielles sont fiables
+	</div>
+	<div class="cell">
+	  <div id="slider_cred_stat" class="slider"></div>
+	  <input type="hidden" id="cred_stat" name="cred_stat">
+	  <table class="slider_label">
+	    <tr>
+	      <td style="width:200px;">
+		Oui,</td>
+	      <td style="text-align:right;">Non, </td>
+	    </tr>
+	    <tr class="small"><td>
+		<div>par exemple, les Etats-Unis ont une tradition de transparence</div>
+	      </td><td style="text-align:right;">l'Argentine publie des chiffres d'inflation peu réalistes. <a href="http://www.economist.com/node/21548229" target="_blank">cf. The Economist</a>
+	      </td>
+	    </tr>
+	  </table>    	  
+	</div>
+      </div>
+    </div>
+
+    <div id="slide4_debutant" class="slide">
+      <h2>Comment jugez-vous qualitativement la situation ?</h2>
+      <br>      
+      <div class="row" style="height:80px;">
+	<div class="cell" title="La crédibilité est essentielle pour convaincre les investisseurs de sa politique, et donc obtenir des taux d'intérêts faible ce qui réduit le paiement de la dette.">
+	  La politique économique du gouvernement semble bonne à long terme
+	</div>
+	<div class="cell" style="margin-bottom:20px;">
+	  <div id="slider_pol_eco" class="slider"></div> 
+	  <input type="hidden" id="pol_eco" name="pol_eco">
+	  
+	  <table class="slider_label">
+	    <tr>
+	      <td style="width:200px;">
+		Oui,</td>
+	      <td style="text-align:right;">Non, </td>
+	    </tr>
+	    <tr class="small"><td>
+		<div>les réformes engagées produiront des effets à long terme, comme <a href="http://www.ifri.org/downloads/ndc09lestrade.pdf" target="_blank">l'Agenda 2010 de Schroeder en Allemagne en 2003</a></div>
+	      </td><td style="text-align:right;">le gouvernement s'inquiète surtout de sa réélection.
+	      </td>
+	    </tr>
+	  </table>   
+	</div>
+      </div>
+      
+      <div class="row" style="height:80px;">
+	<div class="cell">
+	  Les institutions sont efficaces et le climat social et politique est stable
+	</div>
+	<div class="cell" style="margin-bottom:20px;">
+	  <div id="slider_stabilite" class="slider"></div>
+	  <input type="hidden" id="stabilite" name="stabilite"> 
+	  <table class="slider_label">
+	    <tr>
+	      <td style="width:200px;">
+		Oui,</td>
+	      <td style="text-align:right;">Non, </td>
+	    </tr>
+	    <tr class="small"><td>
+		<div ></div>
+	      </td><td style="text-align:right;">
+	      </td>
+	    </tr>
+	  </table>    
+	</div>
+      </div>
+      
+     
+    </div>
+
+    
+    <div id="slide5" class="slide">
+      <h2>Qualité des institutions et risque politique </h2>
+      <br>
+      <div class="row" style="height:80px;">
+	<div class="cell" >
+	  Les institutions sont stables et assurent des contre-pouvoirs
+	</div>
+	<div class="cell">
+	  
+	  <div id="slider_institutions" class="slider"></div>
+	  <input type="hidden" id="institutions" name="institutions">
+	  <table class="slider_label">
+	    <tr>
+	      <td style="width:200px;">
+		Oui,</td>
+	      <td style="text-align:right;">Non, </td>
+	    </tr>
+	    <tr class="small"><td>
+		<div>une seule institution ne peux accaparer le pouvoir</div>
+	      </td><td style="text-align:right;">une seule institution contrôle de fait l'ensemble du pouvoir. <a href="http://www.lefigaro.fr/international/2011/04/18/01003-20110418ARTFIG00599-la-hongrie-adopte-une-constitution-tres-controversee.php" target="_blank">La réforme constitutionnelle en Hongrie </a> a suscité de telles inquiétudes.
+	      </td>
+	    </tr>
+	  </table>    
+	  
+	</div>
+      </div>
+            
+      <div class="row" style="height:80px;">
+	<div class="cell">
+	  Aucune tension sociale ne menace la stabilité du pays
+	</div>
+	<div class="cell">
+	  
+	  <div id="slider_conflit" class="slider"></div>
+	  <input type="hidden" id="conflit" name="conflit">
+	  <table class="slider_label">
+	    <tr>
+	      <td style="width:200px;">
+		Oui,</td>
+	      <td style="text-align:right;">Non, </td>
+	    </tr>
+	    <tr class="small"><td>
+		<div >il existe un consensus global sur le modèle social</div>
+	      </td><td  style="text-align:right;">il y a régulièrement des manifestations violentes et un renversement du pouvoir est possible
+	      </td>
+	    </tr>
+	  </table>    
+	</div>
+      </div>
+      
+    </div>
+
+
+<div id="slide6" class="slide">
+<h2>Risques sur la croissance et sur les finances publiques</h2>
+  <br>
+<div class="row" style="height:80px;">
+  <div class="cell" title="Une forte concentration sur un secteur est un facteur de risque, puisqu'un choc sur ce secteur comme l'explosion d'une bulle a de fortes répercussions sur l'ensemble de l'économie.">
+    L'économie est fortement concentrée sur un secteur
+  </div>
+  <div class="cell">
+        <div id="slider_concentration" class="slider"></div>
+    <input type="hidden" id="concentration" name="concentration">
+  <table class="slider_label">
+	    <tr>
+	      <td style="width:200px;">
+		Oui,</td>
+	      <td style="text-align:right;">Non, </td>
+	    </tr>
+	    <tr class="small"><td>
+		<div >par exemple, le secteur financier est largement prépondérant</div>
+	      </td><td style="text-align:right;">l'économie est diversifiée
+	      </td>
+	    </tr>
+	  </table> 
+</div>
+</div>
+
+<div class="row" style="height:80px;">
+  <div class="cell">
+La croissance est nourrie par le crédit aux ménages qui gonfle le prix des actifs
+  </div>
+  <div class="cell">
+     
+    <div id="slider_credit" class="slider"></div>
+    <input type="hidden" id="credit" name="credit">
+    <table class="slider_label">
+	    <tr>
+	      <td style="width:200px;">
+		Oui,</td>
+	      <td style="text-align:right;">Non, </td>
+	    </tr>
+	    <tr class="small"><td>
+		<div >par exemple, les ménages ont dû fortement s'endetter pour faire face à l'augmentation des prix de l'immobilier, comme en <a href="http://fr.wikipedia.org/wiki/Bulle_immobili%C3%A8re_espagnole" target="_blank">Espagne</a></div>
+	      </td><td style="text-align:right;">les ménages ne sont que peu endettés
+	      </td>
+	    </tr>
+	  </table> 
+  </div>
+</div>
+
+<div class="row" style="height:80px;">
+  <div class="cell" title="L'incapacité d'un Etat a faire respecter le paiement de l'impôt remet en cause sa capacité de remboursement. Les ">
+L'Etat parvient à collecter les impôts et l'économie parallèle est faible
+  </div>
+  <div class="cell">
+    
+    <div id="slider_impot" class="slider"></div>
+    <input type="hidden" id="impot" name="impot">
+<table class="slider_label">
+	    <tr>
+	      <td style="width:200px;">
+		Oui,</td>
+	      <td style="text-align:right;">Non, </td>
+	    </tr>
+	    <tr class="small"><td>
+		<div >la fraude et l'évasion fiscale sont marginales</div>
+	      </td><td style="text-align:right;">l'économie au noir est dominante, personne ne paie la totalité de ses impôts
+	      </td>
+	    </tr>
+	  </table> 
+  </div>
+</div>
+  
+</div>
+
+
+<div id="slide7" class="slide">
+
+<h2>Projections de croissance et de déficit public</h2>
+<div class="vertical">
+<div class="column" style="text-align:center;
+background-image:url(static/open-rating/dash.png); background-repeat:no-repeat;background-position:-20px 160px">
+
+Projections de déficit en % du PIB
+  <table style="float:left;TEXT-ALIGN:CENTER;">
+    <tr>
+      <td style="width:65px;">2012</td><td style="width:65px;">2013</td><td style="width:65px;">2014</td><td style="width:65px;">2015</td><td style="width:65px;">...</td>
+    </tr>
+    <tr>
+      <td>
+	<div id="slider_deficit_2012" class="vertical_slider" style="height:200px;margin:0 auto;"></div>
+	<input type="text" id="deficit_2012" name="deficit_2012" class="range">%
+      </td>
+      <td>
+	<div id="slider_deficit_2013" class="vertical_slider" style="height:200px;"></div>
+	<input type="text" id="deficit_2013" name="deficit_2013" class="range">%
+      </td>
+      <td>
+	<div id="slider_deficit_2014" class="vertical_slider" style="height:200px;"></div>
+	<input type="text" id="deficit_2014" name="deficit_2014" class="range">%
+      </td>
+      <td>
+	<div id="slider_deficit_2015" class="vertical_slider" style="height:200px;"></div>
+	<input type="text" id="deficit_2015" name="deficit_2015" class="range">%
+      </td>
+      <td>
+	<div id="slider_deficit_2016" class="vertical_slider" style="height:200px;"></div>
+	<input type="text" id="deficit_2016" name="deficit_2016" class="range">%
+      </td>
+    </tr>
+  </table>
+<br style="clear:both;" /> 
+<p>
+<img src="static/open-rating/small_dash.png" alt="small dash"/> : limite fixée par le traité de Maastricht
+</p>
+</div>
+
+<div class="column" style="text-align:center;">
+Projections de croissance en % du PIB
+  <table style="float:left; TEXT-ALIGN:CENTER;">
+    <tr>      <td style="width:60px;">2012</td><td style="width:60px;">2013</td><td style="width:60px;">2014</td><td style="width:60px;">2015</td><td style="width:60px;">...</td>
+    </tr>
+    <tr>
+      <td>
+	<div id="slider_croissance_2012" class="vertical_slider" style="height:200px;"></div>
+	<input type="text" id="croissance_2012" name="croissance_2012" value="4.623" class="range">%
+      </td>
+      <td>
+	<div id="slider_croissance_2013" class="vertical_slider" style="height:200px;"></div>
+	<input type="text" id="croissance_2013" name="croissance_2013" value="3.971" class="range">%
+      </td>
+      <td>
+	<div id="slider_croissance_2014" class="vertical_slider" style="height:200px;"></div>
+	<input type="text" id="croissance_2014" name="croissance_2014" value="3.107" class="range">%
+      </td>
+      <td>
+	<div id="slider_croissance_2015" class="vertical_slider" style="height:200px;"></div>
+	<input type="text" id="croissance_2015" name="croissance_2015" value="2.26" class="range">%
+      </td>
+      <td>
+	<div id="slider_croissance_2016" class="vertical_slider" style="height:200px;"></div>
+	<input type="text" id="croissance_2016" name="croissance_2016" value="1.411" class="range">%
+      </td>
+    </tr>
+    </table>
+</div>
+
+</div>
+
+
+</div>
+
+
+<div id="slide8" class="slide">
+  
+  <h2>Enfin, quels sont les éléments qui vous semblent les plus importants ?</h2>
+  <br>
+  Vous devez choisir les réglages de l'algorithme de notation :
+  <br>  
+  <br>
+  <div class="row" style="height:50px;">
+    <div class="cell">
+      Historique de paiement/crédibilité
+    </div>
+    <div class="cell">
+      <div id="slider_credibilite" class="slider"></div>	
+      <input type="text" id="reg_credibilite" name="reg_credibilite" form="ratingForm" class="range">
+    </div>
+  </div>
+  <div class="row" style="height:50px;">
+    <div class="cell">
+      Exposition au risque de change/de taux      
+    </div>
+    <div class="cell">
+      <div id="slider_risque" class="slider"></div>
+      <input type="text" id="reg_risque" name="reg_risque" form="ratingForm" class="range">
+    </div>
+  </div>
+   
+  <div class="row" style="height:50px;">
+    <div class="cell">
+      Déséquilibre macroécomique
+    </div>
+    <div class="cell">
+      <div id="slider_macro" class="slider"></div>
+      <input type="text" id="reg_macro" name="reg_macro" form="ratingForm" class="range">
+    </div>
+  </div>
+  <div class="row" style="height:50px;">
+    <div class="cell">
+      Situation sociale <br>Indice de Développement Humain
+    </div>
+    <div class="cell">
+      <div id="slider_dev" class="slider"></div>
+      <input type="text" id="reg_dev" name="reg_dev" form="ratingForm" class="range">
+    </div>
+  </div>
+  
+<div style="text-align:center;">
+  
+  <input type="submit" id="sendbuttonFB" class="large awesome" style="width:23em;margin:auto;" value="Noter et partager sur Facebook"/>
+  <br>
+  <br>
+  <input type="submit" name="bsubmit" id="sendbutton" class="large awesome" style="width:11em;margin:auto;" value="Noter"/>
+      
+</div>
+</div>
+
+
+<div id="slide8_debutant" class="slide">
+
+  <h2>Merci de ces informations</h2>
+  <br>
+  Open Rating peut maintenant attibuer une note en fonction des paramètres rentrés.
+  <br>  
+  <br>  
+<br><br><div style="text-align:center;">
+  
+  <input type="submit" id="sendbuttonFB_debutant" class="large awesome" style="width:23em;margin:auto;" value="Noter et partager sur Facebook"/>
+<br>
+  <br>
+  <br>
+  <input type="submit" name="bsubmit" id="sendbutton_debutant" class="large awesome" style="width:11em;margin:auto;" value="Noter"/>
+      
+</div>
+</div>
+
+</form>
+
+<div id="popupContact">
+  
+  <a id="popupContactClose"></a>
+
+  <h2>Résultat du calcul de note souveraine</h2>
+  <br>
+  La note calculée est :
+<img src="./static/open-rating/scale.png" alt="Echelle" style="float:left;height:300px;top:25px;left:25px;position:relative;">
+
+
+    <div id="note" style="position:absolute;left:65px;"></div>
+    <div id="note_sp_final" style="position:absolute;left:65px;display:none"></div>
+
+
+	  <div id="dsaDiv" style="float:right;text-align:center;width:340px;">
+	   Evolution de la dette publique :
+	    <img id="dsa" src="./static/open-rating/vide.png" alt="vide" >
+	  </div>
+
+	  <div id="social" style="position:relative ; right:-50px; float:right;">
+	    <div class="fb-like" data-href="http://www.cinequant.com/open-rating" data-send="true" data-width="300" data-show-faces="true"></div>
+	    <!-- Place this tag where you want the +1 button to render -->
+	    <br>
+	    <g:plusone annotation="inline"></g:plusone>
+	    <br>
+	    <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.cinequant.com/open-rating" data-text="Open Rating, l'appli pour noter vous même la dette souveraine" data-lang="fr">Tweeter</a>
+	    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+	  </div>
+  <br>
+
+</div>
+</div>
+
+<div id="backgroundPopup" style="height: 100%; display: none; opacity: 0.7; "></div>
+
+</body>
+</html>

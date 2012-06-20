@@ -152,17 +152,6 @@ box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1);
     float:right;
 }
 
-/* the input field */
-#popupChoice .range {
-    border:1px inset #ddd;
-    font-size:18px;
-    margin:0 0 0 15px;
-    padding:3px 0;
-    width:50px;
-    -moz-border-radius:5px;
-    -webkit-border-radius:5px;
-}
-
 /* cute little CSS3 selector */
 .range[readonly]:focus {
     background-color:transparent;
@@ -196,6 +185,7 @@ clear:both;
     _position:absolute; /* hack for internet explorer 6*/
     height:100%;
     width:100%;
+margin-left:auto;margin-right:auto;
     top:0;
     left:0;
     background:#000000;
@@ -205,8 +195,22 @@ clear:both;
 
 #popupContact{
     display:none;
-    position:fixed;
+    position:relative;
     _position:absolute; /* hack for internet explorer 6*/
+    height:400px;
+    width:500px;
+    margin-left:auto;margin-right:auto;
+    background:#FFFFFF;
+    border:1px solid #000000;
+    z-index:2;
+    padding:12px;
+}
+
+#popupCredit{
+    display:none;
+    position:relative;
+    _position:absolute; /* hack for internet explorer 6*/
+    margin-left:auto;margin-right:auto;
     height:400px;
     width:500px;
     background:#FFFFFF;
@@ -238,6 +242,18 @@ clear:both;
     background-image: url(email_close.png);
 }
 
+#popupCreditClose{
+    line-height:14px;
+    right:-18px;
+    top:-16px;
+    width: 35px;
+    height: 35px;
+    z-index:5;
+    position:absolute;
+    display:block;
+    background-image: url(email_close.png);
+}
+
 #dsaDiv {
     display: none;
 }
@@ -258,17 +274,6 @@ clear:both;
     height: 15px;
     width: 19px;
 }
-
-.popup td#topleft { background-image: url(http://static.jqueryfordesigners.com/demo/images/coda/bubble-1.png); }
-.popup td.top { background-image: url(http://static.jqueryfordesigners.com/demo/images/coda/bubble-2.png); }
-.popup td#topright { background-image: url(http://static.jqueryfordesigners.com/demo/images/coda/bubble-3.png); }
-.popup td.left { background-image: url(http://static.jqueryfordesigners.com/demo/images/coda/bubble-4.png); }
-.popup td.right { background-image: url(http://static.jqueryfordesigners.com/demo/images/coda/bubble-5.png); }
-.popup td#bottomleft { background-image: url(http://static.jqueryfordesigners.com/demo/images/coda/bubble-6.png); }
-.popup td.bottom { background-image: url(http://static.jqueryfordesigners.com/demo/images/coda/bubble-7.png); text-align: center;}
-.popup td.bottom img { display: block; margin: 0 auto; }
-.popup td#bottomright { background-image: url(http://static.jqueryfordesigners.com/demo/images/coda/bubble-8.png); }
-
 .popup table.popup-contents {
     font-size: 12px;
     line-height: 1.2em;
