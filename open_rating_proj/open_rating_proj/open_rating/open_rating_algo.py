@@ -3,6 +3,8 @@
 ################                                                                                                                                                        
 
 import json
+import pygooglechart
+
 from pygooglechart import Chart
 from pygooglechart import SimpleLineChart
 from pygooglechart import Axis
@@ -130,8 +132,8 @@ def rateDec(request):
     return int(seuil)
 
 def ratingToSP(note):
+    #passage d'une note sur 100 a l echelle de SP
     log("ratingToSP")
-    noteSP=""
     notesSP=["D","C","CC","CCC-","CCC", "B-","B","B+","BB-", "BB","BB+", "BBB-","BBB","BBB+","A-","A","A+","AA-","AA","AA+","AAA" ];
     i=note*len(notesSP)/100
     noteSP=notesSP[i]

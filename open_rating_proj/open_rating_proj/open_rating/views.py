@@ -35,5 +35,5 @@ def index(request):
         return HttpResponse(note)
 
     data=[]
-    return render_to_response('open_rating/templates/index.html',{'data':data,'country':country,'note':note},context_instance=RequestContext(request))
+    return render_to_response('index.html',{'data':data,'country':country,'note':note},context_instance=RequestContext(request))
 

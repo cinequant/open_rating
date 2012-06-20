@@ -1,0 +1,16 @@
+<QueryDict: {u'conflit': [u''], u'pays': [u'France'], u'stabilite': [u''], u'reg_credibilite': [u'50'], u'revenus': [u'44401'], u'cred_terme': [u''], u'concentration': [u''], u'courant': [u'-2.663'], u'dette_PIB': [u'87'], u'croissance_2015': [u'2.062'], u'croissance_2014': [u'2.099'], u'croissance_2016': [u'2.081'], u'croissance_2011': [u'1.652'], u'croissance_2013': [u'1.867'], u'croissance_2012': [u'1.399'], u'cred_stat': [u''], u'csrfmiddlewaretoken': [u'ab5e28409314b6bdab6f47b61372b08d'], u'cred_proj': [u''], u'deficit_2014': [u'3.107'], u'deficit_2015': [u'2.26'], u'deficit_2016': [u'1.411'], u'deficit_2011': [u'5.885'], u'deficit_2012': [u'4.623'], u'deficit_2013': [u'3.971'], u'inflation': [u'2'], u'reg_risque': [u'50'], u'chomage': [u'9.518'], u'impot': [u''], u'defaut_exterieur': [u'0'], u'pol_eco': [u''], u'interet': [u'4'], u'reg_dev': [u'50'], u'credit': [u''], u'reg_macro': [u'50'], u'institutions': [u''], u'hdi': [u'0.884']}>
+<QueryDict: {u'conflit': [u''], u'pays': [u'France'], u'stabilite': [u''], u'reg_credibilite': [u'50'], u'revenus': [u'44401'], u'cred_terme': [u''], u'concentration': [u''], u'courant': [u'-2.663'], u'dette_PIB': [u'87'], u'croissance_2015': [u'2.062'], u'croissance_2014': [u'2.099'], u'croissance_2016': [u'2.081'], u'croissance_2011': [u'1.652'], u'croissance_2013': [u'1.867'], u'croissance_2012': [u'1.399'], u'cred_stat': [u''], u'csrfmiddlewaretoken': [u'ab5e28409314b6bdab6f47b61372b08d'], u'cred_proj': [u''], u'deficit_2014': [u'3.107'], u'deficit_2015': [u'2.26'], u'deficit_2016': [u'1.411'], u'deficit_2011': [u'5.885'], u'deficit_2012': [u'4.623'], u'deficit_2013': [u'3.971'], u'inflation': [u'2'], u'reg_risque': [u'50'], u'chomage': [u'9.518'], u'impot': [u''], u'defaut_exterieur': [u'0'], u'pol_eco': [u''], u'interet': [u'4'], u'reg_dev': [u'50'], u'credit': [u''], u'reg_macro': [u'50'], u'institutions': [u''], u'hdi': [u'0.884']}>
+[0.87, 0.8862500904638231, 0.8913260169946149, 0.8855363510086741, 0.87183670362028, 0.850046517010279, 0.8291535990772189, 0.8091210024055941, 0.7899133009876423, 0.7714965275753484, 0.7538381136121461]
+rateDec
+[0.87, 0.8862500904638231, 0.8913260169946149, 0.8855363510086741, 0.87183670362028, 0.850046517010279, 0.8291535990772189, 0.8091210024055941, 0.7899133009876423, 0.7714965275753484, 0.7538381136121461]
+ratingToSP
+fin ratingToSP
+debut graphURL
+[0.87, 0.8862500904638231, 0.8913260169946149, 0.8855363510086741, 0.87183670362028, 0.850046517010279, 0.8291535990772189, 0.8091210024055941, 0.7899133009876423, 0.7714965275753484, 0.7538381136121461]
+109.132601699
+here
+there
+therem
+therem
+there
+fin graphURL

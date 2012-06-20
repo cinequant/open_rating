@@ -52,10 +52,38 @@ MEDIA_ROOT = ''
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
 MEDIA_URL = ''
 
+
+STATIC_ROOT = '/home/vincent/git/open_rating_project/open_rating/static/'
+
+# URL prefix for static files.                                                                                                                                          
+# Example: "http://media.lawrence.com/static/"                                                                                                                          
+STATIC_URL = '/static/'
+
+# URL prefix for admin static files -- CSS, JavaScript and images.                                                                                                      
+# Make sure to use a trailing slash.                                                                                                                                    
+# Examples: "http://foo.com/static/admin/", "/static/admin/".                                                                                                           
+ADMIN_MEDIA_PREFIX = '/static/admin/'
+
+# Additional locations of static files                                                                                                                                  
+STATICFILES_DIRS = (
+    # Put strings here, like "/home/html/static" or "C:/www/django/static".                                                                                             
+    # Always use forward slashes, even on Windows.                                                                                                                      
+    # Don't forget to use absolute paths, not relative paths.                                                                                                           
+)
+
+# List of finder classes that know how to find static files in                                                                                                          
+# various locations.                                                                                                                                                    
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+#    'django.contrib.staticfiles.finders.DefaultStorageFinder',                                                                                                         
+)
+
+
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/media/'
+ADMIN_MEDIA_PREFIX = '/static/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'am87q)dgc(w_25$!i9#qt(r#9h=9n)wf03k1p!k=1xkcw3)fat'
@@ -89,6 +117,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
+    'open_rating_project.open_rating'
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:

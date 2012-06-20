@@ -7,7 +7,7 @@ from django.conf.urls.defaults import *
 urlpatterns = patterns('',
                        
                          # open rating                                                                                                                                                  
-         url(r'^open-rating$', 'open_rating_project.open_rating.views.index'),
+         url(r'^open-rating$', 'open_rating_proj.open_rating.views.index'),
 
     # Example:
     # (r'^open_rating_project/', include('open_rating_project.foo.urls')),
