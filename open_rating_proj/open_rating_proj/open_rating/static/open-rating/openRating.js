@@ -74,47 +74,96 @@ function slideIn(element) {
 }
 
 function next() {
+ 	//supprime le bouton next generic sur la derniere slide
+ 	if (slides.indexOf(slides[current])==slides.length-2) {
+	 	$("#button_generic_next").fadeOut("fast");
+     	}
+    //affiche le bouton next generic sur la 3ieme slide
+	if (slides.indexOf(slides[current])==1) {
+      $("#button_generic_next").fadeIn("fast");
+		}
+		
     document.getElementById(navs_expert[current]).className=""; 
     document.getElementById(navs_expert[current+1]).className="selected"; 
     document.getElementById(navs_debutant[current]).className=""; 
     document.getElementById(navs_debutant[current+1]).className="selected"; 
     
     $(slides[current+1]).css('display',"block");
-    //	$(slides[current+1]).css('left',"850"); 
-    
-    //	$( slides[current]).animate({left:"-100%"},5000, function() {                                             
-    //       $( slides[current] ).hide();                                                                                           
-    //      current=current+1;                                                                                                     
-    //  } );                                                                                                                    
-    //	$( slides[current+1]).animate({left:"0%"},5000, function() {});	
-    jQuery("button").attr('disabled', true);
+   
+    jQuery(".button_next").off('click');
     
     $(".button_previous").off('click');
 
     $( slides[current]).hide("slide", { direction: "left" }, 1500, function() {
-	$( slides[current] ).hide();	
-	current=current+1;    		
-	jQuery("button").attr('disabled', false);
-	$(".button_previous").click(function(){
-            previous();
-        });
+		$( slides[current]).hide();	
+		current=current+1;    		
+		$("#button_pays_existant").click(function(){
+			$("#carte_identite").fadeIn("slow");
+    	});
 
-    } );
+ 	$(".button_next").click(function(){
+     	next();    
+ 	});
+ 
+ 	$("#button_debutant").click(function(){
+	 	$("#nav_debutant").fadeIn("slow");
+	 	slides=slides_debutant;
+	 	
+	});
+ 	
+ 	$("#button_expert").click(function(){
+	 $("#nav_expert").fadeIn("slow");
+	 slides=slides_expert;
+	 
+     });
+		$(".button_previous").click(function(){
+            previous();
+        	});
+    	} );
     $( slides[current+1]).effect("slide", { direction: "right" }, 1500 );
   };
 
 function previous() {
-    document.getElementById(navs_expert[current]).className=""; 
+    //supprime le bouton next generic avant la 3ieme slide
+ 	if (slides.indexOf(slides[current])==2) {
+	 	$("#button_generic_next").fadeOut("fast");
+     	}
+    //affiche le bouton next generic avant la derniere slide
+	if (slides.indexOf(slides[current])==slides.length-1) {
+      $("#button_generic_next").fadeIn("fast");
+	}
+	if (slides.indexOf(slides[current])==1) {
+		$("#nav_debutant").fadeOut("slow");
+		}
+	document.getElementById(navs_expert[current]).className=""; 
     document.getElementById(navs_expert[current-1]).className="selected"; 
     document.getElementById(navs_debutant[current]).className=""; 
     document.getElementById(navs_debutant[current-1]).className="selected"; 
-    jQuery("button").attr('disabled', true);
+    jQuery(".button_next").off('click');
     $(".button_previous").off('click');
 
     $( slides[current]).hide("slide", { direction: "right" }, 1500, function() {
     	$( slides[current] ).hide();	
 	current=current-1;    	
-	jQuery("button").attr('disabled', false);	
+	$("#button_pays_existant").click(function(){
+			$("#carte_identite").fadeIn("slow");
+    });
+
+ 	$(".button_next").click(function(){
+     	next();    
+ 	});
+ 
+ 	$("#button_debutant").click(function(){
+	 	$("#nav_debutant").fadeIn("slow");
+	 	slides=slides_debutant;
+	 	
+	});
+ 	
+ 	$("#button_expert").click(function(){
+	 $("#nav_expert").fadeIn("slow");
+	 slides=slides_expert;
+	 
+     });	
 	$(".button_previous").click(function(){
             previous();
         });
@@ -156,8 +205,6 @@ function loadPopup(){
 	var messages = ["D","C","CC","CCC-","CCC", "B-","B","B+","BB-", "BB","BB+", "BBB-","BBB","BBB+","A-","A","A+","AA-","AA","AA+","AAA"];
 	var positions=["340px","327px","314px","301px","288px","275px","262px","249px","236px","223px","210px","197px","184px","171px","158px","145px","132px","119px","106px","93px","80px"];
 	var message = "";
-
-	//	$("#note").show("slide", { direction: "up" , distance: 300}, 2000 );
 
 	timer = setInterval(function() {
 		var part = messages.shift();
@@ -207,31 +254,27 @@ function disablePopup(){
 
 // lancement au demarrage de la page
 $(document).ready(function(){
-	//  centerFenetre();
+	
 	$("div[title]").tooltip();
 
- $("#button_pays_existant").click(function(){
-		$("#carte_identite").fadeIn("slow");
-                $("#button_generic_next").fadeIn("fast");
-	    });
+ 	$("#button_pays_existant").click(function(){
+			$("#carte_identite").fadeIn("slow");
+    });
 
- $(".button_next").click(function(){
-     if (slides.indexOf(slides[current])==slides.length-2) {
-	 $("#button_generic_next").fadeOut("fast");
-     }
-     next();    
- });
- $("#button_debutant").click(function(){
-	 $("#nav_debutant").fadeIn("slow");
-	 slides=slides_debutant;
-	 next();
-	    });
- $("#button_expert").click(function(){
+ 	
+ 
+ 	$("#button_debutant").click(function(){
+	 	$("#nav_debutant").fadeIn("slow");
+	 	slides=slides_debutant;
+	});
+ 	
+ 	$("#button_expert").click(function(){
 	 $("#nav_expert").fadeIn("slow");
 	 slides=slides_expert;
-	 next();
      });
-
+$(".button_next").click(function(){
+     	next();    
+ 	});
  $(".button_previous").click(function(){
 		previous();
 	    });
@@ -248,10 +291,7 @@ $(document).ready(function(){
      });
 	//LOADING POPUP
 	//Click the button event!
-	$("#info_credibilite").click(function(){
-		alert('credibilite');
-		loadPopupCredibilite();
-	    });	
+
 	//CLOSING POPUP
 	//Click the x event!
 	$("#popupContactClose").click(function(){
